@@ -1,0 +1,55 @@
+﻿mysqldump的相关参数：
+-B 指定多个库，
+-A 备份所有库,
+-F 刷新binlog日志，
+--compact 去掉注释，
+--master-data 增加binlog日志对应点，
+-d 只备份表结构，
+-t 只备份表数据，
+--single-transaction 事务备份
+
+mysqldump -uroot -p123456 -A -B --events l gzip > /opt/a.sql.gz
+gzip 压缩
+
+mysqldump -uroot -p123456 -B db1 </opt/mysql-db1.sql
+
+MySQL内
+system ls /opt
+
+mysql -uroot -p123456 -e "show full processlist"
+
+mysqlbinlog mysql-bin.000001>all.sql
+
+mysqlbinlog -d  oldboy mysql-bin.000001>oldboy.sql
+
+vimdiff oldboy.sql   all.sql
+
+flush privileges
+
+flush table with read lock
+
+unlock tables
+grant replication slave on *.* to copy@% identified by 123456
+
+chkconfig MySQL on  开机自启
+ntsysv
+
+cp  /usr/share/mysql/my-huge.cnf  /etc/my.cnf
+5.5 my-huge.cnf
+5.6 my-default.cnf
+
+my.cnf 字符编码配置
+[client]
+default-character-set=utf8
+
+[mysqld]
+character_set_server=utf8
+character_set_client=utf8
+collation-server=utf8_general_ci
+
+[mysql]
+default-character-set=utf8
+
+
+/var/lib/mysql/ 数据库文件的存放路径
+/u
