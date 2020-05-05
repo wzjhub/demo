@@ -37,6 +37,13 @@ public class MyController {
     }
 
 
+    @RequestMapping("/snowflake")
+    public String index(){
+
+        return test1Service.getIDBySnowFlake();
+    }
+
+
 
     @RequestMapping("/add")
     public static void addJob() throws SchedulerException {//.setJobData(null)

@@ -8,4 +8,6 @@ public interface Test1Service {
 
 
     List<Test1> selectAll();
+
+    String getIDBySnowFlake();
 }

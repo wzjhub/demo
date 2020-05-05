@@ -17,8 +17,8 @@ public class MyThreadPoolDemo {
                 Executors.defaultThreadFactory(),
                 //new ThreadPoolExecutor.CallerRunsPolicy()
                 //new ThreadPoolExecutor.AbortPolicy()
-                //new ThreadPoolExecutor.DiscardOldestPolicy()
-                new ThreadPoolExecutor.DiscardPolicy()
+                new ThreadPoolExecutor.DiscardOldestPolicy()
+                //new ThreadPoolExecutor.DiscardPolicy()
         );
 
         try {
