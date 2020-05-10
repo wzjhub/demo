@@ -1,0 +1,10 @@
+systemctl start firewalld
+
+systemctl restart firewalld
+
+service firewalld status
+
+firewall-cmd --zone=public --list-ports
+
+firewall-cmd --zone=public --add-port=3306/tcp --permanent
+

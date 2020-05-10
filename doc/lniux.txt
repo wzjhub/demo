@@ -1,0 +1,116 @@
+LNIUX教程
+https://www.cnblogs.com/ysocean/p/7689137.html
+代码重工文档地址如下：
+http://39.108.113.88
+https://www.cnblogs.com/jpfss/articles/8616469.html
+三级分销
+https://blog.csdn.net/wei349914638/article/details/80844789
+
+查询上月数据
+select * from tab_user_month_profile where PERIOD_DIFF(DATE_FORMAT(NOW(),'%Y%m'),DATE_FORMAT(str_to_date(month_time, '%Y-%m'),'%Y%m'))=1;
+关联更新
+UPDATE tab_every_profile e inner join tab_device_store_merchant b 
+on b.`admin_eid` = e.ad_eid
+SET e.MID = b.merchant_id, e.eid = b.device_id, e.store_id = b.store_id 
+
+docker启动mysql:
+docker run -p 12345:3306 --name docker-mysql
+-v /wzj/mysql/conf:/etc/mysql/conf.d 
+-v /wzj/mysql/logs:/logs
+-v /wzj/mysql/data:/var/lib/mysql 
+-e MYSQL_ROOT_PASSWORD=123456 
+-d e1e1680ac726
+
+docker exec -it 7f5ed0fde997 /bin/bash
+
+docker启动tomcat:
+docker run -d -p 8080:8080 --name tomcat1
+-v /wzj/tomcat/test:/usr/local/tomcat/webapps/test
+-v /wzj/tomcat/logs:/usr/local/tomcat/logs
+--privileged=true tomcat
+
+docker cp console tomcat1:/usr/local/tomcat/webapps
+
+docker启动redis:
+docker run -p 6379:6379 --name myredis
+-v /wzj/myredis/conf/redis.conf:/usr/local/etc/redis/redis.conf 
+-v /wzj/myredis/data:/data 
+-d redis:3.2 redis- server /etc/redis/redis.conf
+--appendonly yes
+
+docker exec -it myredis redis-cli 
+
+lniux启动mysql:
+登录进入mysql，mysql-5.7.18/bin目录下执行命令：./mysql -uroot -p 
+执行授权命令 
+例如：grant all privileges on *.* to root@'%' identified by '123456'
+②更新权限信息，执行flush刷新权限 
+例如：flush privileges; 
+
+重启docker:
+systemctl daemon-reload
+systemctl start docker
+
+查看防火墙状态
+systemctl status firewalld
+查看所有开放端口
+firewall-cmd --zone=public --list-ports
+开放端口:
+firewall-cmd --zone=public --add-port=2375/tcp --permanent 
+或
+/sbin/iptables -I INPUT -p tcp --dport 12345 -j ACCEPT
+
+重启防火墙
+systemctl restart firewall
+开启启动容器
+docker update --restart=always redis(容器名)
+
+发布项目：
+nohup java -jar -Dspring.profiles.active=prod -Dserver.port=8082 member-console-1.0.0.jar & > /dev/null 2>&1
+
+查找ifconfig
+yum search ifconfig
+bash也是有分割线的，当然这不是在重点，重点是通过yum search 这个命令我们发现ifconfig这个命令是在net-tools.x86_64这个包里，接下来我们安装这个包就行了,原来ifconfig命令来源于net-tools，这个包里有ifconfig，netstat，whois等命令
+安装ifconfig
+yum install net-tools.x86_64
+ifconfig
+
+启动 docker 映射到宿主机时出现如下错误时：
+/usr/bin/docker-current: Error response from daemon: driver failed programming external connectivity on endpoint sc_mysql (1bc03030afe9f722ae1e6b46166172a70cf87bcc3f02f0acdac0be2a7f0f0036): (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 3306 -j DNAT --to-destination 172.17.0.2:3306 ! -i docker0: iptables: No chain/target/match by that name.
+
+[root@seichung ] pkill docker # 终止进程
+[root@seichung ] iptables -t nat -F # 清空 nat 表的所有链
+[root@seichung ] ifconfig docker0 down # 停止 docker 默认网桥
+[root@seichung ] yum install bridge-utils -y # 部分机器是无法使用 brctl，所以需要提前安装
+[root@seichung ] brctl delbr docker0 # 删除网桥 
+[root@seichung ] systemctl restart docker # 重启docker
+docker 镜像成功映射后，会在 iptables 上添加所属的链
+iptables -nL
+
+git链接远程github:
+git remote add origin https://github.com/wang-zhij/wzj.git
+git remote -v
+git push origin master //提交到origin的master
+git clone https://github.com/wang-zhij/wzj.git
+git fetch origin master //抓取origin的master
+git checkout origin/master //切换到origin的master
+git merge origin/master //合并
+pull=fetch+merge
+
+启动zookeeper:
+/usr/local/zookeeper/bin/zkServer.sh
+start 
+/usr/local/zookeeper/conf/zoo/cfg
+
+./zkServer.sh status
+
+./zkCli.sh -server localhost:2181
+
+
+nginx安装及配置
+./configure --prefix=/peizhi
+make
+make install
+
+./sbin/nginx -v
+./sbin/nginx -t 检查配置文件的正确性

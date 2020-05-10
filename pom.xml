@@ -125,7 +125,7 @@
 
         <dependency>
             <groupId>cn.hutool</groupId>
-            <artifactId>hutool-captcha</artifactId>
+            <artifactId>hutool-all</artifactId>
             <version>4.6.8</version>
         </dependency>
     </dependencies>
