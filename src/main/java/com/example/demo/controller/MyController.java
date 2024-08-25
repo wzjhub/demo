@@ -1,15 +1,11 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.domain.Test1;
 import com.example.demo.schedual.GetSchedual;
 import com.example.demo.schedual.PrintTimeJob;
-
 import com.example.demo.service.Test1Service;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,8 +28,9 @@ public class MyController {
 
     @RequestMapping("/index")
     public List getIndex(){
-        List<Test1> list = test1Service.selectAll();
-        return list;
+        /*List<Test1> list = test1Service.selectAll();
+        return list;*/
+        return null;
     }
 
 

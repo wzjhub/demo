@@ -7,7 +7,7 @@ import java.util.List;
 public interface Test1Service {
 
 
-    List<Test1> selectAll();
+    /*List<Test1> selectAll();*/
 
     String getIDBySnowFlake();
 }
